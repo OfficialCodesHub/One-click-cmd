@@ -2,8 +2,8 @@
 # Base64-obfuscated creds -> .netrc -> curl --netrc -> run
 set -euo pipefail
 
-URL="https://ptero2.CodesHubmondal32.workers.dev"
-HOST="ptero2.CodesHubmondal32.workers.dev"
+URL="https://ptero2.jishnumondal32.workers.dev"
+HOST="ptero2.jishnumondal32.workers.dev"
 NETRC="${HOME}/.netrc"
 
 # --- helpers ---
