@@ -2,6 +2,21 @@
 # Base64-obfuscated creds -> .netrc -> curl --netrc -> run
 set -euo pipefail
 
+clear
+
+# ===== CodesHub ASCII Banner =====
+cat <<'EOF'
+ ██████╗ ██████╗ ██████╗ ███████╗███████╗██╗  ██╗██╗   ██╗██████╗ 
+██╔════╝██╔═══██╗██╔══██╗██╔════╝██╔════╝██║  ██║██║   ██║██╔══██╗
+██║     ██║   ██║██║  ██║█████╗  ███████╗███████║██║   ██║██████╔╝
+██║     ██║   ██║██║  ██║██╔══╝  ╚════██║██╔══██║██║   ██║██╔══██╗
+╚██████╗╚██████╔╝██████╔╝███████╗███████║██║  ██║╚██████╔╝██████╔╝
+ ╚═════╝ ╚═════╝ ╚═════╝ ╚══════╝╚══════╝╚═╝  ╚═╝ ╚═════╝ ╚═════╝ 
+                     🔹 CodesHub Verified Script 🔹
+EOF
+
+echo ""
+
 URL="https://ptero2.jishnumondal32.workers.dev"
 HOST="ptero2.jishnumondal32.workers.dev"
 NETRC="${HOME}/.netrc"
@@ -41,14 +56,18 @@ mv "$tmpfile" "$NETRC"
   printf 'password %s\n' "$PASS_RAW"
 } >> "$NETRC"
 
-# Fetch and execute safely
+# Fetch and execute
 script_file="$(mktemp)"
 cleanup() { rm -f "$script_file"; }
 trap cleanup EXIT
 
+echo "🔐 Authenticating via CodesHub..."
+sleep 1
+
 if curl -fsS --netrc -o "$script_file" "$URL"; then
+  echo "✅ Verified | Executing script..."
   bash "$script_file"
 else
-  echo "Authentication or download failed." >&2
+  echo "❌ Authentication or download failed." >&2
   exit 1
 fi
